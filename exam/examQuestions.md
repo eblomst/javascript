@@ -151,3 +151,74 @@ JavaScript on the DataBase
 
 Perfect for Single Page Apps
  
+- Explain about the Event Loop in Node.js
+
+In our previous project we had problems with a blocking API.
+
+When you read from a file, the calling thread blocks
+
+When you read from a network stream, the calling thread blocks
+
+Basically, when you do any IO, the calling thread block until the IO operation is done
+
+Threads were necessary to solve these blocking problems, with all the problems that comes with threads
+
+Node is a single threaded application. 
+
+Node Js is non-blocking
+
+Blocking code:
+
+````
+var contens = fs.readFileSync('etc/hosts');
+
+console.log(contens);
+console.log('Doing something else');
+````
+
+Non-blocking code:
+````
+fs.readFile('etc/hosts', function(err, contents) {
+   console.log(contents);
+});
+
+console.log('Do something');
+````
+
+The eventloop keeps checking if their are any events to come in and when there's an event that comes in
+it will trigger the event and then run the callback.
+
+When we run a node application it registers events and they can trigger more events. When our applications goes into 
+the event loop, the event loop can trigger and admitting events to the event queue. These events are going to processed 
+one of the time by our event loop.
+
+  
+- Explain (some) of the purposes with the tools Babel and WebPack, using  examples from the exercises
+
+Webpack is a module bundler. It means that webpack takes modules and dependencies and generates static assets representing those modules.
+
+Webpack out of the box only knows how to read and understand .js files.
+
+We use babel to convert our code to old JavaScript syntax because the support of browsers are still low. 
+
+In the webpackEx we have used modules babel-loader, css-loader, file-loader. Look at webpack.config.js
+
+
+- Explain the purpose of “use strict” and also Linters, exemplified with ESLint 
+
+It defines that JavaScript should execute the code in strict mode. In strict mode you can't use undeclared variables. 
+
+**Why use it**
+
+Strict mode makes it easier to write "secure" JavaScript.
+
+Strict mode changes previously accepted "bad syntax" into real errors.
+
+As an example, in normal JavaScript, mistyping a variable name creates a new global variable. In strict mode, 
+this will throw an error, making it impossible to accidentally create a global variable.
+
+In normal JavaScript, a developer will not receive any error feedback assigning values to non-writable properties.
+
+In strict mode, any assignment to a non-writable property, a getter-only property, a non-existing property, a non-existing variable, or a non-existing object, will throw an error.
+
+
