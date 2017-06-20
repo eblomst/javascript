@@ -8,7 +8,7 @@ var n = nock('http://jokes-plaul.rhcloud.com');
 describe('Person API Get', function () {
   before(function (done) {
     n.get('/api/joke')
-      .reply(200,testJoke );
+      .reply(200,testJoke);
     done();
   });
 
